@@ -4,11 +4,14 @@
   "private": true,
   "scripts": {
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "postinstall": "jetify"
   },
   "dependencies": {
     "react": "16.8.6",
-    "react-native": "0.60.5"
+    "react-native": "0.60.5",
+    "react-native-gesture-handler": "^1.4.1",
+    "react-navigation": "^4.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.5.0",
@@ -23,6 +26,7 @@
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-prettier": "^3.1.0",
     "jest": "^24.1.0",
+    "jetifier": "^1.6.4",
     "metro-react-native-babel-preset": "0.54.1",
     "prettier": "^1.18.2",
     "react-test-renderer": "16.8.6"
