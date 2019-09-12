@@ -3,34 +3,34 @@ module.exports = {
     es6: true,
   },
   extends: [
-    'airbnb-base', 'prettier', 'prettier/react'
+    'airbnb', 'prettier'
   ],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
-    __DEV__: true
+    __DEV__: 'readonly'
   },
-  parser: 'babel-eslint',
-  plugins: ['react', 'jsx-a11y', 'import', 'react-hooks', 'prettier'],
   parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
     ecmaVersion: 2018,
     sourceType: 'module',
   },
+  plugins: [
+    'react', 'prettier', 'react-hooks'
+  ],
   rules: {
     'prettier/prettier': 'error',
     'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx'] }],
-    'import/prefer-default-export': 'off',
-    'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-    'react/jsx-one-expression-per-line': 'off',
-    'global-require': 'off',
-    'react-native/no-raw-text': 'off',
-    'no-param-reassign': 'off',
-    'no-underscore-dangle': 'off',
-    'camelcase': 'off',
-    'no-console': ['error', { allow: ['tron'] }],
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
-    'react/jsx-props-no-spreading': 'off'
+    'react/jsx-props-no-spreading': 'off',
+    'no-console': ['error', { allow: ['tron'] }],
+    'import/prefer-default-export': 'off',
+    'react/jsx-one-expression-per-line': 'off',
+    'camelcase': 'off',
+    'no-param-reassign': 'off',
   },
   settings: {
     'import/resolver': {
