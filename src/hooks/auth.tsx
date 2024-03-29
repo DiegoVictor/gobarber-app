@@ -4,6 +4,7 @@ import React, {
   useState,
   useContext,
   useEffect,
+  PropsWithChildren,
 } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -36,7 +37,7 @@ interface AuthContextData {
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
-export const AuthProvider: React.FC = ({ children }) => {
+export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [data, setData] = useState<AuthState>({} as AuthState);
   const [loading, setLoading] = useState(true);
 
@@ -46,7 +47,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     setData({} as AuthState);
   }, []);
 
-  const signIn = useCallback(async ({ email, password }) => {
+  const signIn = useCallback(async ({ email, password }: Credentials) => {
     const response = await api.post('sessions', { email, password });
 
     const { token, user } = response.data;
