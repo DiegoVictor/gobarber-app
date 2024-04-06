@@ -37,7 +37,6 @@
     "@faker-js/faker": "^8.4.1",
     "@react-native-community/eslint-config": "^3.2.0",
     "@testing-library/dom": "^9.3.4",
-    "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/jest-native": "^5.4.3",
     "@testing-library/react": "^14.2.2",
     "@testing-library/react-native": "^12.4.4",
@@ -70,13 +69,10 @@
   },
   "jest": {
     "preset": "@testing-library/react-native",
-    "testEnvironment": "jest-environment-jsdom",
+    "testEnvironment": "node",
     "setupFiles": [
       "./src/setupTests.ts",
       "./node_modules/react-native-gesture-handler/jestSetup.js"
-    ],
-    "setupFilesAfterEnv": [
-      "<rootDir>/jest-setup.ts"
     ],
     "moduleFileExtensions": [
       "ts",
