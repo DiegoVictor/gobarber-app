@@ -66,32 +66,5 @@
     "prettier": "^3.2.5",
     "react-test-renderer": "^18.2.0",
     "typescript": "^5.4.3"
-  },
-  "jest": {
-    "preset": "@testing-library/react-native",
-    "testEnvironment": "node",
-    "setupFiles": [
-      "./src/setupTests.ts",
-      "./node_modules/react-native-gesture-handler/jestSetup.js"
-    ],
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ],
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "src/pages/**/*.tsx",
-      "src/components/**/*.tsx",
-      "src/hooks/**/*.tsx",
-      "!src/hooks/**/index.tsx"
-    ],
-    "coverageDirectory": "tests/coverage",
-    "transformIgnorePatterns": [
-      "node_modules/(?!(@react-native|react-native|react-native-vector-icons|@react-native-community/datetimepicker)/)"
-    ]
   }
 }
