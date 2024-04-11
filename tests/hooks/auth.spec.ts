@@ -1,3 +1,5 @@
+/** @jest-environment jsdom */
+
 import { act, renderHook } from '@testing-library/react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import MockAdapter from 'axios-mock-adapter';
@@ -36,7 +38,7 @@ describe('Auth hook', () => {
     });
 
     await act(async () => {
-      result.current.signIn({
+      await result.current.signIn({
         email: user.email,
         password: user.password,
       });
@@ -63,8 +65,8 @@ describe('Auth hook', () => {
       wrapper: AuthProvider,
     });
 
-    act(() => {
-      result.current.signOut();
+    await act(async () => {
+      await result.current.signOut();
     });
 
     expect(AsyncStorage.multiRemove).toHaveBeenCalledWith([
@@ -88,8 +90,8 @@ describe('Auth hook', () => {
       wrapper: AuthProvider,
     });
 
-    act(() => {
-      result.current.updateUser(updatedUser);
+    await act(async () => {
+      await result.current.updateUser(updatedUser);
     });
 
     expect(AsyncStorage.setItem).toHaveBeenCalledWith(
