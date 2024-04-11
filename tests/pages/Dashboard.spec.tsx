@@ -1,12 +1,11 @@
 import React from 'react';
-import { fireEvent, render, act } from '@testing-library/react-native';
+import { fireEvent, render, act, waitFor } from '@testing-library/react-native';
 import { faker } from '@faker-js/faker';
 import MockAdapter from 'axios-mock-adapter';
 
 import api from '../../src/services/api';
 import Dashboard from '../../src/pages/Dashboard';
 import factory from '../utils/factory';
-import wait from '../utils/wait';
 
 interface Provider {
   id: string;
@@ -49,9 +48,7 @@ describe('Dashboard page', () => {
 
     const { getByText, getByTestId } = render(<Dashboard />);
 
-    await wait(() =>
-      expect(getByTestId(`provider_${provider.id}`)).toBeTruthy(),
-    );
+    await waitFor(() => getByTestId(`provider_${provider.id}`));
 
     expect(getByText(name)).toBeTruthy();
   });
@@ -62,9 +59,7 @@ describe('Dashboard page', () => {
 
     const { getByTestId } = render(<Dashboard />);
 
-    await wait(() =>
-      expect(getByTestId(`provider_${provider.id}`)).toBeTruthy(),
-    );
+    await waitFor(() => getByTestId(`provider_${provider.id}`));
 
     await act(async () => {
       fireEvent.press(getByTestId('profile'));
@@ -80,9 +75,7 @@ describe('Dashboard page', () => {
 
     const { getByTestId } = render(<Dashboard />);
 
-    await wait(() =>
-      expect(getByTestId(`provider_${provider.id}`)).toBeTruthy(),
-    );
+    await waitFor(() => getByTestId(`provider_${provider.id}`));
 
     fireEvent.press(getByTestId(`provider_${provider.id}`));
 

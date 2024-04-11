@@ -1,10 +1,9 @@
 import React from 'react';
-import { act, render, fireEvent } from '@testing-library/react-native';
+import { act, render, fireEvent, waitFor } from '@testing-library/react-native';
 import { faker } from '@faker-js/faker';
 import MockAdapter from 'axios-mock-adapter';
 import { Alert, Platform } from 'react-native';
 
-import wait from '../utils/wait';
 import CreatedAppointment from '../../src/pages/CreateAppointment';
 import api from '../../src/services/api';
 import factory from '../utils/factory';
@@ -70,7 +69,7 @@ describe('CreateAppointment page', () => {
 
     const { getByTestId } = render(<CreatedAppointment />);
 
-    await wait(() => expect(getByTestId('goback')).toBeTruthy());
+    await waitFor(() => getByTestId('goback'));
 
     fireEvent.press(getByTestId('goback'));
 
@@ -112,9 +111,7 @@ describe('CreateAppointment page', () => {
 
     const { getByTestId, getByText } = render(<CreatedAppointment />);
 
-    await wait(() =>
-      expect(getByTestId(`provider_${provider.id}`)).toBeTruthy(),
-    );
+    await waitFor(() => getByTestId(`provider_${provider.id}`));
 
     await act(async () => {
       fireEvent.press(getByTestId(`provider_${provider.id}`));
@@ -128,7 +125,7 @@ describe('CreateAppointment page', () => {
 
     fireEvent.press(getByTestId(`calendar`));
 
-    await wait(() => expect(getByTestId('date-picker')).toBeTruthy());
+    await waitFor(() => getByTestId('date-picker'));
     await act(async () => {
       fireEvent(getByTestId('date-picker'), 'onChange', {
         type: 'event',
@@ -188,9 +185,7 @@ describe('CreateAppointment page', () => {
 
     const { getByTestId } = render(<CreatedAppointment />);
 
-    await wait(() =>
-      expect(getByTestId(`provider_${provider.id}`)).toBeTruthy(),
-    );
+    await waitFor(() => getByTestId(`provider_${provider.id}`));
 
     await act(async () => {
       fireEvent.press(getByTestId(`provider_${provider.id}`));
@@ -198,7 +193,7 @@ describe('CreateAppointment page', () => {
 
     fireEvent.press(getByTestId(`calendar`));
 
-    await wait(() => expect(getByTestId('date-picker')).toBeTruthy());
+    await waitFor(() => getByTestId('date-picker'));
     await act(async () => {
       fireEvent(getByTestId('date-picker'), 'onChange', {
         type: 'event',
@@ -253,9 +248,7 @@ describe('CreateAppointment page', () => {
 
     const { getByTestId } = render(<CreatedAppointment />);
 
-    await wait(() =>
-      expect(getByTestId(`provider_${provider.id}`)).toBeTruthy(),
-    );
+    await waitFor(() => getByTestId(`provider_${provider.id}`));
 
     await act(async () => {
       fireEvent.press(getByTestId(`provider_${provider.id}`));
