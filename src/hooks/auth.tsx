@@ -31,7 +31,7 @@ export interface AuthContextData {
   user: User;
   loading: boolean;
   signIn(credentials: Credentials): Promise<void>;
-  signOut(): void;
+  signOut(): Promise<void>;
   updateUser(user: User): Promise<void>;
 }
 
