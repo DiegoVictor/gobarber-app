@@ -14,8 +14,7 @@ This app version allow users to register yourself, reset or change password, ema
   * [Coverage report](#coverage-report)
 
 # Screenshots
-Click to expand.
-
+Click to expand.<br />
 <img src="https://raw.githubusercontent.com/DiegoVictor/gobarber-app/main/screenshots/login.png" width="32%" />
 <img src="https://raw.githubusercontent.com/DiegoVictor/gobarber-app/main/screenshots/register.png" width="32%" />
 <img src="https://raw.githubusercontent.com/DiegoVictor/gobarber-app/main/screenshots/forgot.png" width="32%" />
