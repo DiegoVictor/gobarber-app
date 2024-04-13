@@ -1,0 +1,22 @@
+version: 2.1
+orbs:
+  node: circleci/node@5.0.2
+  codecov: codecov/codecov@1.1.1
+executors:
+  test-executor:
+    docker:
+      - image: cimg/node:20.12.2
+jobs:
+  test:
+    executor: test-executor
+    steps:
+      - checkout
+      - node/install-packages:
+          cache-path: ~/gobarber-app/node_modules
+      - run: npm run test
+      - codecov/upload:
+          file: tests/coverage/*.json
+workflows:
+  test:
+    jobs:
+      - test
