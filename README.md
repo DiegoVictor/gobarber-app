@@ -33,3 +33,29 @@ Click to expand.<br />
 <img src="https://raw.githubusercontent.com/DiegoVictor/gobarber-app/main/screenshots/schedule.png" width="32%" />
 <img src="https://raw.githubusercontent.com/DiegoVictor/gobarber-app/main/screenshots/success.png" width="32%" />
 
+# Installing
+
+Easy peasy lemon squeezy:
+```
+$ yarn
+```
+Or:
+```
+$ npm install
+```
+> Was installed and configured the [`eslint`](https://eslint.org/) and [`prettier`](https://prettier.io/) to keep the code clean and patterned.
+
+## Configuring
+Configure your environment variables and remember to start the [API](https://github.com/DiegoVictor/gobarber-api) before to start this app.
+
+### .env
+In this file you may configure the API's url. Rename the `.env.example` in the root directory to `.env` then just update with your settings.
+
+key|description|default
+---|---|---
+API_URL|API's url|`http://localhost:3333`
+
+### API
+Start the [`API`](https://github.com/DiegoVictor/gobarber-api) (see its README for more information). In case of any change in the API's port or host remember to update the `.env`'s `API_URL` property too.
+> Also, maybe you need run reverse command to the API's port: `adb reverse tcp:3333 tcp:3333`
+
