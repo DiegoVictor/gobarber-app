@@ -1,5 +1,5 @@
 # [App] GoBarber
-![CircleCI](https://img.shields.io/circleci/build/github/DiegoVictor/gobarber-app?style=flat-square&logo=circleci)
+[![CircleCI](https://img.shields.io/circleci/build/github/DiegoVictor/gobarber-app?style=flat-square&logo=circleci)](https://app.circleci.com/pipelines/github/DiegoVictor/gobarber-app)
 [![react-native](https://img.shields.io/badge/react--native-0.73.6-61dafb?style=flat-square&logo=react)](https://reactnative.dev/)
 [![styled-components](https://img.shields.io/badge/styled_components-6.1.8-db7b86?style=flat-square&logo=styled-components)](https://styled-components.com/)
 [![eslint](https://img.shields.io/badge/eslint-8.57.0-4b32c3?style=flat-square&logo=eslint)](https://eslint.org/)
