@@ -75,8 +75,14 @@ describe('SignUp page', () => {
 
     const { getByPlaceholderText, getByTestId } = render(<SignUp />);
 
-    fireEvent.changeText(getByPlaceholderText('Nome'), user.name);
-    fireEvent.changeText(getByPlaceholderText('Email'), user.email);
+    const name = getByPlaceholderText('Nome');
+    fireEvent.changeText(name, user.name);
+    fireEvent(name, 'submitEditing');
+
+    const email = getByPlaceholderText('Email');
+    fireEvent.changeText(email, user.email);
+    fireEvent(email, 'submitEditing');
+
     fireEvent.changeText(getByPlaceholderText('Senha'), user.password);
 
     await act(async () => {
