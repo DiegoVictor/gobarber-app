@@ -1,9 +1,6 @@
 import React, {
-  useEffect,
-  useRef,
   forwardRef,
   PropsWithChildren,
-  useCallback,
   ForwardRefRenderFunction,
 } from 'react';
 import { TextInputProps, TextInput as RNTextInput } from 'react-native';
@@ -17,17 +14,13 @@ interface InputProps extends TextInputProps {
   styles?: {};
 }
 
-const Input: ForwardRefRenderFunction<RNTextInput, PropsWithChildren<InputProps>> = (
-  { error, icon, styles, ...props },
-  ref
-) => {
+const Input: ForwardRefRenderFunction<
+  RNTextInput,
+  PropsWithChildren<InputProps>
+> = ({ error, icon, styles, ...props }, ref) => {
   return (
     <Container isErrored={!!error} style={styles}>
-      <Icon
-        name={icon}
-        size={20}
-        color="#666360"
-      />
+      <Icon name={icon} size={20} color="#666360" />
       <TextInput
         ref={ref}
         placeholderTextColor="#666360"
