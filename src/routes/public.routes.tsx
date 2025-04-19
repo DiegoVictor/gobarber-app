@@ -5,7 +5,13 @@ import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import ForgotPassword from '../pages/ForgotPassword';
 
-const Auth = createStackNavigator();
+export type StackParamList = {
+  SignIn: undefined;
+  SignUp: undefined;
+  ForgotPassword: undefined;
+};
+
+const Auth = createStackNavigator<StackParamList>();
 
 const PublicRoutes: React.FC = () => {
   return (

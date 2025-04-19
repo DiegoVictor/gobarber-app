@@ -6,7 +6,18 @@ import AppointmentCreated from '../pages/AppointmentCreated';
 import CreateAppointment from '../pages/CreateAppointment';
 import Dashboard from '../pages/Dashboard';
 
-const App = createStackNavigator();
+export type StackParamList = {
+  Dashboard: undefined;
+  CreateAppointment: {
+    providerId: string;
+  };
+  AppointmentCreated: {
+    date: number;
+  };
+  Profile: undefined;
+};
+
+const App = createStackNavigator<StackParamList>();
 
 const AppRoutes: React.FC = () => {
   return (
