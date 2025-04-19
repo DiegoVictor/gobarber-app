@@ -34,7 +34,7 @@ const schema = Yup.object().shape({
 });
 
 const SignUp: React.FC = () => {
-  const navigation = useNavigation();
+  const { goBack } = useNavigation();
   const emailRef = useRef<TextInput>(null);
   const passwordRef = useRef<TextInput>(null);
   const [data, setData] = useState<SignUpFormData>({});
@@ -52,7 +52,7 @@ const SignUp: React.FC = () => {
         'Cadastro realizado com sucesso!',
         'Você já pode fazer login na aplicação.',
       );
-      navigation.goBack();
+      goBack();
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const errors = getValidationErrors(err);
@@ -64,7 +64,7 @@ const SignUp: React.FC = () => {
         );
       }
     }
-  }, [navigation, data]);
+  }, [goBack, data]);
 
   return (
     <>
@@ -147,7 +147,7 @@ const SignUp: React.FC = () => {
           </Container>
         </ScrollView>
       </KeyboardAvoidingView>
-      <BackToSignIn onPress={() => navigation.goBack()} testID="signin">
+      <BackToSignIn onPress={() => goBack()} testID="signin">
         <Icon name="arrow-left" size={20} color="#fff" />
         <BackToSignInText>Voltar para logon</BackToSignInText>
       </BackToSignIn>

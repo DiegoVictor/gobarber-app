@@ -38,7 +38,7 @@ const schema = Yup.object().shape({
 });
 
 const SignIn: React.FC = () => {
-  const navigation = useNavigation();
+  const { navigate } = useNavigation<NavigateProps>();
   const passwordInputRef = useRef<TextInput>(null);
   const [errors, setErrors] = useState<ErrorBag | null>({});
   const [data, setData] = useState<SignInFormData>({});
@@ -127,7 +127,7 @@ const SignIn: React.FC = () => {
             </Button>
 
             <ForgotPassword
-              onPress={() => navigation.navigate('ForgotPassword')}
+              onPress={() => navigate('ForgotPassword')}
               testID="forgot-password"
             >
               <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
@@ -135,10 +135,7 @@ const SignIn: React.FC = () => {
           </Container>
         </ScrollView>
       </KeyboardAvoidingView>
-      <CreateAccount
-        onPress={() => navigation.navigate('SignUp')}
-        testID="signup"
-      >
+      <CreateAccount onPress={() => navigate('SignUp')} testID="signup">
         <Icon name="log-in" size={20} color="#ff9000" />
         <CreateAccountText>Criar um conta</CreateAccountText>
       </CreateAccount>

@@ -25,7 +25,7 @@ const schema = Yup.object().shape({
 });
 
 const ForgotPassword: React.FC = () => {
-  const navigation = useNavigation();
+  const { goBack } = useNavigation();
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
 
@@ -41,7 +41,7 @@ const ForgotPassword: React.FC = () => {
         'Email de recuperação enviado!',
         'Enviamos um email para confirmar a recuperação de senha, verifique sua caixa de entrada.',
       );
-      navigation.goBack();
+      goBack();
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const errors = getValidationErrors(err);
@@ -53,7 +53,7 @@ const ForgotPassword: React.FC = () => {
         );
       }
     }
-  }, [navigation]);
+  }, [goBack]);
 
   return (
     <>
@@ -90,7 +90,7 @@ const ForgotPassword: React.FC = () => {
           </Container>
         </ScrollView>
       </KeyboardAvoidingView>
-      <BackToSignIn onPress={() => navigation.goBack()} testID="signin">
+      <BackToSignIn onPress={() => goBack()} testID="signin">
         <Icon name="arrow-left" size={20} color="#fff" />
         <BackToSignInText>Voltar para logon</BackToSignInText>
       </BackToSignIn>

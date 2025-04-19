@@ -60,11 +60,7 @@ const CreatedAppointment: React.FC = () => {
     routeParams.providerId,
   );
   const { user } = useAuth();
-  const { goBack, navigate } = useNavigation();
-
-  const navigateBack = useCallback(() => {
-    goBack();
-  }, [goBack]);
+  const { goBack, navigate } = useNavigation<NavigateProps>();
 
   const handleSelectProvider = useCallback((providerId: string) => {
     setSelectedProvider(providerId);
@@ -160,7 +156,7 @@ const CreatedAppointment: React.FC = () => {
   return (
     <Container>
       <Header>
-        <BackButton onPress={navigateBack} testID="goback">
+        <BackButton onPress={() => goBack()} testID="goback">
           <Icon name="chevron-left" size={24} color="#999591" />
         </BackButton>
 

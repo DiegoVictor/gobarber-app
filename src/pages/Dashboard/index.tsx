@@ -29,7 +29,7 @@ export interface Provider {
 
 const Dashboard: React.FC = () => {
   const { user } = useAuth();
-  const { navigate } = useNavigation();
+  const { navigate } = useNavigation<NavigateProps>();
   const [providers, setProviders] = useState<Provider[]>([]);
 
   const navigateToProfile = useCallback(() => {

@@ -57,7 +57,7 @@ const schema = Yup.object().shape({
 
 const Profile: React.FC = () => {
   const { user, updateUser } = useAuth();
-  const navigation = useNavigation();
+  const { goBack } = useNavigation();
 
   const [errors, setErrors] = useState<ErrorBag | null>(null);
   const [data, setData] = useState<ProfileFormData>({});
@@ -90,7 +90,7 @@ const Profile: React.FC = () => {
       const response = await api.put('profile', formData);
       updateUser(response.data);
       Alert.alert('Perfil atualizado com sucesso!');
-      navigation.goBack();
+      goBack();
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const errors = getValidationErrors(err);
@@ -102,11 +102,7 @@ const Profile: React.FC = () => {
         );
       }
     }
-  }, [updateUser, navigation, data]);
-
-  const goBack = useCallback(() => {
-    navigation.goBack();
-  }, [navigation]);
+  }, [updateUser, goBack, data]);
 
   const handleUpdateAvatar = useCallback(async () => {
     const { didCancel, errorMessage, assets } =
@@ -147,7 +143,7 @@ const Profile: React.FC = () => {
           keyboardShouldPersistTaps="handled"
         >
           <Container>
-            <BackButton onPress={goBack} testID="goback">
+            <BackButton onPress={() => goBack()} testID="goback">
               <Icon name="chevron-left" size={24} color="#999591" />
             </BackButton>
             <UserAvatarButton onPress={handleUpdateAvatar} testID="avatar">
