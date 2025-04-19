@@ -25,6 +25,14 @@ interface SignUpFormData {
   password?: string;
 }
 
+const schema = Yup.object().shape({
+  name: Yup.string().required('Nome obrigatório'),
+  email: Yup.string()
+    .email('Digite um email válido')
+    .required('Email obrigatório'),
+  password: Yup.string().min(6, 'No minimo 6 digitos'),
+});
+
 const SignUp: React.FC = () => {
   const navigation = useNavigation();
   const emailRef = useRef<TextInput>(null);
@@ -36,13 +44,6 @@ const SignUp: React.FC = () => {
     try {
       setErrors(null);
 
-      const schema = Yup.object().shape({
-        name: Yup.string().required('Nome obrigatório'),
-        email: Yup.string()
-          .email('Digite um email válido')
-          .required('Email obrigatório'),
-        password: Yup.string().min(6, 'No minimo 6 digitos'),
-      });
       await schema.validate(data, { abortEarly: false });
 
       await api.post('users', data);

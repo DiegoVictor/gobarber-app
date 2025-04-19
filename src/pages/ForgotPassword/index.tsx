@@ -18,6 +18,12 @@ import Button from '../../components/Button';
 import Logo from '../../assets/logo.png';
 import { Container, Title, BackToSignIn, BackToSignInText } from './styles';
 
+const schema = Yup.object().shape({
+  email: Yup.string()
+    .email('Digite um email válido')
+    .required('Email obrigatório'),
+});
+
 const ForgotPassword: React.FC = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
@@ -26,12 +32,6 @@ const ForgotPassword: React.FC = () => {
   const handleSubmit = useCallback(async () => {
     try {
       setError('');
-
-      const schema = Yup.object().shape({
-        email: Yup.string()
-          .email('Digite um email válido')
-          .required('Email obrigatório'),
-      });
 
       const data = { email };
       await schema.validate(data, { abortEarly: false });

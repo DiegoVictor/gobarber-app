@@ -33,6 +33,28 @@ interface ProfileFormData {
   password_confirmation?: string;
 }
 
+const schema = Yup.object().shape({
+  name: Yup.string().required('Nome obrigatório'),
+  email: Yup.string()
+    .email('Digite um email válido')
+    .required('Email obrigatório'),
+  old_password: Yup.string(),
+  password: Yup.string().when('old_password', {
+    is: (value: string) => {
+      return typeof value === 'string' && value.length > 0;
+    },
+    then: (schema: Yup.Schema) => schema.required('Campo obrigatório'),
+  }),
+  password_confirmation: Yup.string()
+    .when('old_password', {
+      is: (value: string) => {
+        return typeof value === 'string' && value.length > 0;
+      },
+      then: (schema: Yup.Schema) => schema.required('Campo obrigatório'),
+    })
+    .oneOf([Yup.ref('password')], 'Confirmação incorreta'),
+});
+
 const Profile: React.FC = () => {
   const { user, updateUser } = useAuth();
   const navigation = useNavigation();
@@ -48,28 +70,6 @@ const Profile: React.FC = () => {
   const handleSubmit = useCallback(async () => {
     try {
       setErrors(null);
-
-      const schema = Yup.object().shape({
-        name: Yup.string().required('Nome obrigatório'),
-        email: Yup.string()
-          .email('Digite um email válido')
-          .required('Email obrigatório'),
-        old_password: Yup.string(),
-        password: Yup.string().when('old_password', {
-          is: (value: string) => {
-            return typeof value === 'string' && value.length > 0;
-          },
-          then: (schema: Yup.Schema) => schema.required('Campo obrigatório'),
-        }),
-        password_confirmation: Yup.string()
-          .when('old_password', {
-            is: (value: string) => {
-              return typeof value === 'string' && value.length > 0;
-            },
-            then: (schema: Yup.Schema) => schema.required('Campo obrigatório'),
-          })
-          .oneOf([Yup.ref('password')], 'Confirmação incorreta'),
-      });
 
       await schema.validate(data, { abortEarly: false });
 

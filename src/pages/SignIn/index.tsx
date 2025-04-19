@@ -30,6 +30,12 @@ interface SignInFormData {
   email?: string;
   password?: string;
 }
+const schema = Yup.object().shape({
+  email: Yup.string()
+    .email('Digite um email válido')
+    .required('Email obrigatório'),
+  password: Yup.string().required('Senha obrigatória'),
+});
 
 const SignIn: React.FC = () => {
   const navigation = useNavigation();
@@ -42,12 +48,6 @@ const SignIn: React.FC = () => {
     try {
       setErrors(null);
 
-      const schema = Yup.object().shape({
-        email: Yup.string()
-          .email('Digite um email válido')
-          .required('Email obrigatório'),
-        password: Yup.string().required('Senha obrigatória'),
-      });
       await schema.validate(data, { abortEarly: false });
 
       const { email, password } = data;
