@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
+import { StackScreenProps } from '@react-navigation/stack';
 
 import api from '../../services/api';
 import { useAuth } from '../../hooks/auth';
@@ -20,12 +21,15 @@ import {
   ProviderMeta,
   ProviderMetaText,
 } from './styles';
+import { StackParamList } from '../../routes/app.routes';
 
 export interface Provider {
   id: string;
   name: string;
   avatar_url: string;
 }
+
+type NavigateProps = StackScreenProps<StackParamList>['navigation'];
 
 const Dashboard: React.FC = () => {
   const { user } = useAuth();

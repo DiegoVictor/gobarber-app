@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Platform, Alert, ListRenderItemInfo } from 'react-native';
 import { format } from 'date-fns';
+import { StackScreenProps } from '@react-navigation/stack';
 
 import api from '../../services/api';
 import { useAuth } from '../../hooks/auth';
@@ -32,6 +33,7 @@ import {
   CreateAppointmentButton,
   CreateAppointmentButtonText,
 } from './styles';
+import { StackParamList } from '../../routes/app.routes';
 
 interface RouteParams {
   providerId: string;
@@ -47,6 +49,8 @@ interface AvailabilityItem {
   hour: number;
   available: boolean;
 }
+
+type NavigateProps = StackScreenProps<StackParamList>['navigation'];
 
 const CreatedAppointment: React.FC = () => {
   const [selectedHour, setSelectedHour] = useState(0);

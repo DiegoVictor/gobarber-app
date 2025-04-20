@@ -11,6 +11,7 @@ import {
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
 import * as Yup from 'yup';
+import { StackScreenProps } from '@react-navigation/stack';
 
 import getValidationErrors, { ErrorBag } from '../../utils/getValidationErrors';
 import Input from '../../components/Input';
@@ -25,11 +26,15 @@ import {
   CreateAccount,
   CreateAccountText,
 } from './styles';
+import { StackParamList } from '../../routes/public.routes';
 
 interface SignInFormData {
   email?: string;
   password?: string;
 }
+
+type NavigateProps = StackScreenProps<StackParamList>['navigation'];
+
 const schema = Yup.object().shape({
   email: Yup.string()
     .email('Digite um email válido')

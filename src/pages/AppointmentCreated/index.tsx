@@ -3,6 +3,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { StackScreenProps } from '@react-navigation/stack';
 
 import {
   Container,
@@ -11,13 +12,16 @@ import {
   OkButton,
   OkButtonText,
 } from './styles';
+import { StackParamList } from '../../routes/app.routes';
 
 interface RouteParams {
   date: number;
 }
 
+type NavigateProps = StackScreenProps<StackParamList>['navigation'];
+
 const AppointmentCreated: React.FC = () => {
-  const { reset } = useNavigation();
+  const { reset } = useNavigation<NavigateProps>();
   const { params } = useRoute();
   const routeParams = params as RouteParams;
 
