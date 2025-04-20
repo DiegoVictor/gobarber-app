@@ -53,7 +53,7 @@ const ForgotPassword: React.FC = () => {
         );
       }
     }
-  }, [goBack]);
+  }, [email, goBack]);
 
   return (
     <>
