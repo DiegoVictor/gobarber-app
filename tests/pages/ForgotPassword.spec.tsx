@@ -74,7 +74,10 @@ describe('ForgotPassword page', () => {
 
     const { getByPlaceholderText, getByTestId } = render(<ForgotPassword />);
 
-    fireEvent.changeText(getByPlaceholderText('Email'), user.email);
+    fireEvent.changeText(
+      getByPlaceholderText('Email'),
+      user.email.toLowerCase(),
+    );
 
     await act(async () => {
       fireEvent.press(getByTestId('submit'));
