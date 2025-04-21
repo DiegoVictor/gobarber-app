@@ -22,9 +22,9 @@ jest.mock('@react-navigation/native', () => {
   };
 });
 
-describe('ForgotPassword page', () => {
-  const apiMock = new MockAdapter(api);
+const apiMock = new MockAdapter(api);
 
+describe('ForgotPassword page', () => {
   beforeEach(() => {
     mockedGoBack.mockClear();
   });
