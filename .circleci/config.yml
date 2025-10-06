@@ -1,16 +1,14 @@
 version: 2.1
 orbs:
+  node: circleci/node@7.1.0
   codecov: codecov/codecov@4.2.0
-executors:
-  test-executor:
-    docker:
-      - image: cimg/node:20.12.2
 jobs:
   test:
-    executor: test-executor
+    executor: node/default
     steps:
       - checkout
-      - run: npm ci
+      - node/install-packages:
+          cache-path: ~/project/node_modules
       - run: npm run test
       - codecov/upload
 workflows:
