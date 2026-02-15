@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState, useMemo } from 'react';
 import { useRoute, useNavigation } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/Feather';
+import { Feather } from '@react-native-vector-icons/feather';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { Platform, Alert, ListRenderItemInfo } from 'react-native';
 import { format } from 'date-fns';
@@ -161,7 +161,7 @@ const CreatedAppointment: React.FC = () => {
     <Container>
       <Header>
         <BackButton onPress={() => goBack()} testID="goback">
-          <Icon name="chevron-left" size={24} color="#999591" />
+          <Feather name="chevron-left" size={24} color="#999591" />
         </BackButton>
 
         <HeaderTitle>Cabeleireiros</HeaderTitle>

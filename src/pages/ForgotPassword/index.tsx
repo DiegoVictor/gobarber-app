@@ -7,7 +7,7 @@ import {
   Platform,
   Alert,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
+import { Feather } from '@react-native-vector-icons/feather';
 import { useNavigation } from '@react-navigation/native';
 import * as Yup from 'yup';
 
@@ -91,7 +91,7 @@ const ForgotPassword: React.FC = () => {
         </ScrollView>
       </KeyboardAvoidingView>
       <BackToSignIn onPress={() => goBack()} testID="signin">
-        <Icon name="arrow-left" size={20} color="#fff" />
+        <Feather name="arrow-left" size={20} color="#fff" />
         <BackToSignInText>Voltar para logon</BackToSignInText>
       </BackToSignIn>
     </>

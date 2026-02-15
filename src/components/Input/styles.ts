@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components/native';
-import FeatherIcon from 'react-native-vector-icons/Feather';
+import { Feather } from '@react-native-vector-icons/feather';
 import { TextInput as RNTextInput } from 'react-native';
 
 interface ContainerProps {
@@ -39,6 +39,6 @@ export const Error = styled.Text`
   text-align: right;
 `;
 
-export const Icon = styled(FeatherIcon)`
+export const Icon = styled(Feather)`
   margin-right: 16px;
 `;

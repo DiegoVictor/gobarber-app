@@ -8,7 +8,7 @@ import {
   TextInput,
   Alert,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
+import { Feather } from '@react-native-vector-icons/feather';
 import { useNavigation } from '@react-navigation/native';
 import * as Yup from 'yup';
 import { StackScreenProps } from '@react-navigation/stack';
@@ -141,7 +141,7 @@ const SignIn: React.FC = () => {
         </ScrollView>
       </KeyboardAvoidingView>
       <CreateAccount onPress={() => navigate('SignUp')} testID="signup">
-        <Icon name="log-in" size={20} color="#ff9000" />
+        <Feather name="log-in" size={20} color="#ff9000" />
         <CreateAccountText>Criar um conta</CreateAccountText>
       </CreateAccount>
     </>

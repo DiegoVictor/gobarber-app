@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import Icon from 'react-native-vector-icons/Feather';
+import { Feather } from '@react-native-vector-icons/feather';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -41,7 +41,7 @@ const AppointmentCreated: React.FC = () => {
 
   return (
     <Container>
-      <Icon name="check" size={80} color="#04d361" />
+      <Feather name="check" size={80} color="#04d361" />
 
       <Title>Agendamento concluido</Title>
       <Description>{formattedDate}</Description>

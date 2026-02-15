@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import Icon from 'react-native-vector-icons/Feather';
+import { Feather } from '@react-native-vector-icons/feather';
 import { useNavigation } from '@react-navigation/native';
 import { StackScreenProps } from '@react-navigation/stack';
 
@@ -87,11 +87,11 @@ const Dashboard: React.FC = () => {
             <ProviderInfo>
               <ProviderName>{item.name}</ProviderName>
               <ProviderMeta>
-                <Icon name="calendar" size={14} color="#ff9000" />
+                <Feather name="calendar" size={14} color="#ff9000" />
                 <ProviderMetaText>Segunda à sexta</ProviderMetaText>
               </ProviderMeta>
               <ProviderMeta>
-                <Icon name="clock" size={14} color="#ff9000" />
+                <Feather name="clock" size={14} color="#ff9000" />
                 <ProviderMetaText>8h às 18h</ProviderMetaText>
               </ProviderMeta>
             </ProviderInfo>

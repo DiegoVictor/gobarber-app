@@ -7,7 +7,7 @@ import {
   TextInput,
   Alert,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
+import { Feather } from '@react-native-vector-icons/feather';
 import { useNavigation } from '@react-navigation/native';
 import * as Yup from 'yup';
 import ImagePicker from 'react-native-image-picker';
@@ -144,7 +144,7 @@ const Profile: React.FC = () => {
         >
           <Container>
             <BackButton onPress={() => goBack()} testID="goback">
-              <Icon name="chevron-left" size={24} color="#999591" />
+              <Feather name="chevron-left" size={24} color="#999591" />
             </BackButton>
             <UserAvatarButton onPress={handleUpdateAvatar} testID="avatar">
               <UserAvatar source={{ uri: user.avatar_url }} />
