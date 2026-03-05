@@ -1,11 +1,10 @@
 import React from 'react';
 import { ActivityIndicator, View } from 'react-native';
-
-import PublicRoutes from './public.routes';
-import AppRoutes from './app.routes';
+import { PublicRoutes } from './public.routes';
+import { PrivateRoutes } from './private.routes';
 import { useAuth } from '../hooks/auth';
 
-const Routes: React.FC = () => {
+export const AppRoutes: React.FC = () => {
   const { user, loading } = useAuth();
 
   if (loading) {
@@ -16,7 +15,5 @@ const Routes: React.FC = () => {
     );
   }
 
-  return user ? <AppRoutes /> : <PublicRoutes />;
+  return user ? <PrivateRoutes /> : <PublicRoutes />;
 };
-
-export default Routes;
