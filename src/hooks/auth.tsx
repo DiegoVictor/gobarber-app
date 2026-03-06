@@ -42,7 +42,7 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   const signOut = useCallback(async () => {
-    await AsyncStorage.multiRemove(['@GoBarber:token', '@GoBarber:user']);
+    await AsyncStorage.multiRemove(['@gobarber:token', '@gobarber:user']);
 
     setData({} as AuthState);
   }, []);
@@ -53,8 +53,8 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
     const { token, user } = response.data;
 
     await AsyncStorage.multiSet([
-      ['@GoBarber:token', token],
-      ['@GoBarber:user', JSON.stringify(user)],
+      ['@gobarber:token', token],
+      ['@gobarber:user', JSON.stringify(user)],
     ]);
 
     api.defaults.headers.authorization = `Bearer ${token}`;
@@ -63,7 +63,7 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   const updateUser = useCallback(
     async (user: User) => {
-      await AsyncStorage.setItem('@GoBarber:user', JSON.stringify(user));
+      await AsyncStorage.setItem('@gobarber:user', JSON.stringify(user));
       setData({
         token: data.token,
         user,
@@ -75,8 +75,8 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
   useEffect(() => {
     (async (): Promise<void> => {
       const [[, token], [, user]] = await AsyncStorage.multiGet([
-        '@GoBarber:token',
-        '@GoBarber:user',
+        '@gobarber:token',
+        '@gobarber:user',
       ]);
 
       if (token && user) {
