@@ -7,8 +7,7 @@ import React, {
   PropsWithChildren,
 } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-import api from '../services/api';
+import { api } from '../services/api';
 
 interface User {
   id: string;
