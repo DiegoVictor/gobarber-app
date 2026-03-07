@@ -6,6 +6,10 @@ interface ContainerProps {
   isErrored: boolean;
 }
 
+interface IconProps {
+  name: string;
+}
+
 export const Container = styled.View<ContainerProps>`
   align-items: center;
   background-color: #232129;
@@ -39,6 +43,6 @@ export const Error = styled.Text`
   text-align: right;
 `;
 
-export const Icon = styled(Feather)`
+export const Icon = styled(Feather)<IconProps>`
   margin-right: 16px;
 `;

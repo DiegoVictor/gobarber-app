@@ -4,7 +4,6 @@ import React, {
   ForwardRefRenderFunction,
 } from 'react';
 import { TextInputProps, TextInput as RNTextInput } from 'react-native';
-
 import { Container, TextInput, Icon, Error } from './styles';
 
 interface InputProps extends TextInputProps {
@@ -14,7 +13,7 @@ interface InputProps extends TextInputProps {
   styles?: {};
 }
 
-const Input: ForwardRefRenderFunction<
+const InputWithForwardRef: ForwardRefRenderFunction<
   RNTextInput,
   PropsWithChildren<InputProps>
 > = ({ error, icon, styles, ...props }, ref) => {
@@ -32,4 +31,4 @@ const Input: ForwardRefRenderFunction<
   );
 };
 
-export default forwardRef(Input);
+export const Input = forwardRef(InputWithForwardRef);
