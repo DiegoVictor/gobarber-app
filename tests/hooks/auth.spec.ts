@@ -1,13 +1,10 @@
-/** @jest-environment jsdom */
-
-import { act, renderHook } from '@testing-library/react';
+import { act, renderHook } from '@testing-library/react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import MockAdapter from 'axios-mock-adapter';
 import { faker } from '@faker-js/faker';
-
-import api from '../../src/services/api';
+import { api } from '../../src/services/api';
 import factory from '../utils/factory';
-import { AuthContextData, AuthProvider, useAuth } from '../../src/hooks/auth';
+import { AuthProvider, useAuth } from '../../src/hooks/auth';
 
 interface User {
   id: string;
@@ -45,8 +42,8 @@ describe('Auth hook', () => {
     });
 
     expect(AsyncStorage.multiSet).toHaveBeenCalledWith([
-      ['@GoBarber:token', token],
-      ['@GoBarber:user', JSON.stringify(user)],
+      ['@gobarber:token', token],
+      ['@gobarber:user', JSON.stringify(user)],
     ]);
   });
 
@@ -70,8 +67,8 @@ describe('Auth hook', () => {
     });
 
     expect(AsyncStorage.multiRemove).toHaveBeenCalledWith([
-      '@GoBarber:token',
-      '@GoBarber:user',
+      '@gobarber:token',
+      '@gobarber:user',
     ]);
   });
 
@@ -95,7 +92,7 @@ describe('Auth hook', () => {
     });
 
     expect(AsyncStorage.setItem).toHaveBeenCalledWith(
-      '@GoBarber:user',
+      '@gobarber:user',
       JSON.stringify(updatedUser),
     );
   });
