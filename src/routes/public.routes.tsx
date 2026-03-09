@@ -1,9 +1,8 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-
-import SignIn from '../pages/SignIn';
-import SignUp from '../pages/SignUp';
-import ForgotPassword from '../pages/ForgotPassword';
+import { SignIn } from '../pages/public/SignIn';
+import { SignUp } from '../pages/public/SignUp';
+import { ForgotPassword } from '../pages/public/ForgotPassword';
 
 export type StackParamList = {
   SignIn: undefined;
@@ -13,7 +12,7 @@ export type StackParamList = {
 
 const Auth = createStackNavigator<StackParamList>();
 
-const PublicRoutes: React.FC = () => {
+export const PublicRoutes: React.FC = () => {
   return (
     <Auth.Navigator
       screenOptions={{
@@ -27,5 +26,3 @@ const PublicRoutes: React.FC = () => {
     </Auth.Navigator>
   );
 };
-
-export default PublicRoutes;
