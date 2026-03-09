@@ -1,10 +1,9 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-
-import Profile from '../pages/Profile';
-import AppointmentCreated from '../pages/AppointmentCreated';
-import CreateAppointment from '../pages/CreateAppointment';
-import Dashboard from '../pages/Dashboard';
+import { Dashboard } from '../pages/private/Dashboard';
+import { CreatedAppointment } from '../pages/private/CreateAppointment';
+import { AppointmentCreated } from '../pages/private/AppointmentCreated';
+import { Profile } from '../pages/private/Profile';
 
 export type StackParamList = {
   Dashboard: undefined;
@@ -19,7 +18,7 @@ export type StackParamList = {
 
 const App = createStackNavigator<StackParamList>();
 
-const AppRoutes: React.FC = () => {
+export const PrivateRoutes: React.FC = () => {
   return (
     <App.Navigator
       screenOptions={{
@@ -28,12 +27,10 @@ const AppRoutes: React.FC = () => {
       }}
     >
       <App.Screen name="Dashboard" component={Dashboard} />
-      <App.Screen name="CreateAppointment" component={CreateAppointment} />
+      <App.Screen name="CreateAppointment" component={CreatedAppointment} />
       <App.Screen name="AppointmentCreated" component={AppointmentCreated} />
 
       <App.Screen name="Profile" component={Profile} />
     </App.Navigator>
   );
 };
-
-export default AppRoutes;
