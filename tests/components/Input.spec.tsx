@@ -7,8 +7,7 @@ import {
   TextInput as RNTextInput,
   View,
 } from 'react-native';
-
-import Input from '../../src/components/Input';
+import { Input } from '../../src/components/Input';
 
 const send = jest.fn();
 
