@@ -106,32 +106,37 @@ export const Profile: React.FC = () => {
     }
   };
 
-  const handleUpdateAvatar = useCallback(async () => {
-    const { didCancel, errorMessage, assets } =
-      await ImagePicker.launchImageLibrary({
-        mediaType: 'photo',
-        quality: 1,
-      });
+  const handleUpdateAvatar = async () => {
+    const permissionResult =
+      await ImagePicker.requestMediaLibraryPermissionsAsync();
 
-    if (!didCancel) {
-      if (errorMessage) {
-        Alert.alert(`Erro ao atualizar seu avatar: ${errorMessage}`);
-      } else {
-        const data = new FormData();
+    if (!permissionResult.granted) {
+      Alert.alert(
+        'Permission required',
+        'Permission to access the media library is required.',
+      );
+      return;
+    }
 
-        if (Array.isArray(assets)) {
-          const [{ uri }] = assets;
+    const { canceled, assets } = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ['images'],
+      quality: 1,
+    });
 
-          if (uri) {
-            data.append('avatar', uri);
+    if (!canceled) {
+      if (Array.isArray(assets)) {
+        const [{ uri }] = assets;
 
-            const response = await api.patch('users/avatar', data);
-            updateUser(response.data);
-          }
+        if (uri) {
+          const data = new FormData();
+          data.append('avatar', uri);
+
+          const response = await api.patch('users/avatar', data);
+          updateUser(response.data);
         }
       }
     }
-  }, [updateUser]);
+  };
 
   return (
     <>
