@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   View,
   ScrollView,
@@ -10,13 +10,15 @@ import {
 import { Feather } from '@react-native-vector-icons/feather';
 import { useNavigation } from '@react-navigation/native';
 import * as Yup from 'yup';
-import ImagePicker from 'react-native-image-picker';
-
-import { useAuth } from '../../hooks/auth';
-import api from '../../services/api';
-import getValidationErrors, { ErrorBag } from '../../utils/getValidationErrors';
-import Input from '../../components/Input';
-import Button from '../../components/Button';
+import * as ImagePicker from 'expo-image-picker';
+import { useAuth } from '../../../hooks/auth';
+import { api } from '../../../services/api';
+import {
+  getValidationErrors,
+  ErrorBag,
+} from '../../../utils/getValidationErrors';
+import { Input } from '../../../components/Input';
+import { Button } from '../../../components/Button';
 import {
   Container,
   BackButton,
@@ -55,7 +57,7 @@ const schema = Yup.object().shape({
     .oneOf([Yup.ref('password')], 'Confirmação incorreta'),
 });
 
-const Profile: React.FC = () => {
+export const Profile: React.FC = () => {
   const { user, updateUser } = useAuth();
   const { goBack } = useNavigation();
 
@@ -67,7 +69,7 @@ const Profile: React.FC = () => {
   const passwordInputRef = useRef<TextInput>(null);
   const confirmPasswordInputRef = useRef<TextInput>(null);
 
-  const handleSubmit = useCallback(async () => {
+  const handleSubmit = async () => {
     try {
       setErrors(null);
 
@@ -102,7 +104,7 @@ const Profile: React.FC = () => {
         );
       }
     }
-  }, [updateUser, goBack, data]);
+  };
 
   const handleUpdateAvatar = useCallback(async () => {
     const { didCancel, errorMessage, assets } =
@@ -261,5 +263,3 @@ const Profile: React.FC = () => {
     </>
   );
 };
-
-export default Profile;
