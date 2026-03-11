@@ -3,12 +3,8 @@ import { fireEvent, render, act } from '@testing-library/react-native';
 import { Alert } from 'react-native';
 import { faker } from '@faker-js/faker';
 import MockAdapter from 'axios-mock-adapter';
-import {
-  ImageLibraryOptions,
-} from 'react-native-image-picker';
-
-import api from '../../src/services/api';
-import Profile from '../../src/pages/Profile';
+import { api } from '../../src/services/api';
+import { Profile } from '../../src/pages/private/Profile';
 import factory from '../utils/factory';
 
 interface User {
@@ -38,13 +34,14 @@ jest.mock('../../src/hooks/auth', () => {
   };
 });
 
+const mockRequestMediaLibraryPermissionsAsync = jest.fn();
 const mockLaunchImageLibrary = jest.fn();
-jest.mock('react-native-image-picker', () => {
+jest.mock('expo-image-picker', () => {
   return {
-    __esModule: true,
-    default: {
-      launchImageLibrary: (options: ImageLibraryOptions) => mockLaunchImageLibrary(options)
-    }
+    requestMediaLibraryPermissionsAsync: () =>
+      mockRequestMediaLibraryPermissionsAsync(),
+    launchImageLibraryAsync: (options: Record<string, any>) =>
+      mockLaunchImageLibrary(options),
   };
 });
 
@@ -52,7 +49,7 @@ describe('Profile page', () => {
   const apiMock = new MockAdapter(api);
 
   beforeEach(() => {
-    jest.resetAllMocks()
+    jest.resetAllMocks();
   });
 
   it('should be able to update your user', async () => {
@@ -201,12 +198,17 @@ describe('Profile page', () => {
   it('should be able to select a new avatar', async () => {
     apiMock.onPatch('/users/avatar').reply(200, { success: true });
 
+    mockRequestMediaLibraryPermissionsAsync.mockResolvedValueOnce({
+      granted: true,
+    });
     mockLaunchImageLibrary.mockResolvedValueOnce({
-      didCancel: false,
-      assets: [{
-        uri: faker.system.filePath()
-      }]
-    })
+      cancel: false,
+      assets: [
+        {
+          uri: faker.system.filePath(),
+        },
+      ],
+    });
 
     const { getByTestId } = render(<Profile />);
     await act(async () => {
@@ -216,35 +218,47 @@ describe('Profile page', () => {
     expect(mockedUpdateUser).toHaveBeenCalledWith({ success: true });
   });
 
-  it('should not be able to select a new avatar', async () => {
+  it('should be able to not grant access to media library', async () => {
     const alert = jest.spyOn(Alert, 'alert');
 
-    const errorMessage = 'Unknown error'
-    mockLaunchImageLibrary.mockResolvedValueOnce({
-      didCancel: false,
-      errorMessage
-    })
+    mockRequestMediaLibraryPermissionsAsync.mockResolvedValueOnce({
+      granted: false,
+    });
 
     const { getByTestId } = render(<Profile />);
     await act(async () => {
       fireEvent.press(getByTestId('avatar'));
     });
 
+    expect(mockRequestMediaLibraryPermissionsAsync).toHaveBeenCalled();
+    expect(mockLaunchImageLibrary).not.toHaveBeenCalled();
+
     expect(mockedUpdateUser).not.toHaveBeenCalled();
-    expect(alert).toHaveBeenCalledWith(`Erro ao atualizar seu avatar: ${errorMessage}`);
+    expect(alert).toHaveBeenCalledWith(
+      'Permission required',
+      'Permission to access the media library is required.',
+    );
   });
 
   it('should be able to cancel the avatar change', async () => {
     const alert = jest.spyOn(Alert, 'alert');
 
     alert.mockClear();
-    mockLaunchImageLibrary.mockResolvedValueOnce({
-      didCancel: true,
-    })
+    mockRequestMediaLibraryPermissionsAsync.mockResolvedValueOnce({
+      granted: true,
+    });
+
+    mockLaunchImageLibrary.mockResolvedValueOnce({ canceled: true });
 
     const { getByTestId } = render(<Profile />);
     await act(async () => {
       fireEvent.press(getByTestId('avatar'));
+    });
+
+    expect(mockRequestMediaLibraryPermissionsAsync).toHaveBeenCalled();
+    expect(mockLaunchImageLibrary).toHaveBeenCalledWith({
+      mediaTypes: ['images'],
+      quality: 1,
     });
 
     expect(mockedUpdateUser).not.toHaveBeenCalled();
