@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   Image,
   View,
@@ -11,12 +11,14 @@ import {
 import { Feather } from '@react-native-vector-icons/feather';
 import { useNavigation } from '@react-navigation/native';
 import * as Yup from 'yup';
-
-import api from '../../services/api';
-import getValidationErrors, { ErrorBag } from '../../utils/getValidationErrors';
-import Input from '../../components/Input';
-import Button from '../../components/Button';
-import Logo from '../../assets/logo.png';
+import { api } from '../../../services/api';
+import {
+  ErrorBag,
+  getValidationErrors,
+} from '../../../utils/getValidationErrors';
+import { Input } from '../../../components/Input';
+import { Button } from '../../../components/Button';
+import Logo from '../../../assets/logo.png';
 import { Container, Title, BackToSignIn, BackToSignInText } from './styles';
 
 interface SignUpFormData {
@@ -33,14 +35,14 @@ const schema = Yup.object().shape({
   password: Yup.string().min(6, 'No minimo 6 digitos'),
 });
 
-const SignUp: React.FC = () => {
+export const SignUp: React.FC = () => {
   const { goBack } = useNavigation();
   const emailRef = useRef<TextInput>(null);
   const passwordRef = useRef<TextInput>(null);
   const [data, setData] = useState<SignUpFormData>({});
   const [errors, setErrors] = useState<ErrorBag | null>(null);
 
-  const handleSubmit = useCallback(async () => {
+  const handleSubmit = async () => {
     try {
       setErrors(null);
 
@@ -64,7 +66,7 @@ const SignUp: React.FC = () => {
         );
       }
     }
-  }, [goBack, data]);
+  };
 
   return (
     <>
@@ -154,5 +156,3 @@ const SignUp: React.FC = () => {
     </>
   );
 };
-
-export default SignUp;
