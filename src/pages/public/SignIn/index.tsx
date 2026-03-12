@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   Image,
   View,
@@ -12,12 +12,14 @@ import { Feather } from '@react-native-vector-icons/feather';
 import { useNavigation } from '@react-navigation/native';
 import * as Yup from 'yup';
 import { StackScreenProps } from '@react-navigation/stack';
-
-import getValidationErrors, { ErrorBag } from '../../utils/getValidationErrors';
-import Input from '../../components/Input';
-import Button from '../../components/Button';
-import Logo from '../../assets/logo.png';
-import { useAuth } from '../../hooks/auth';
+import {
+  ErrorBag,
+  getValidationErrors,
+} from '../../../utils/getValidationErrors';
+import { Input } from '../../../components/Input';
+import { Button } from '../../../components/Button';
+import Logo from '../../../assets/logo.png';
+import { useAuth } from '../../../hooks/auth';
 import {
   Container,
   Title,
@@ -26,7 +28,7 @@ import {
   CreateAccount,
   CreateAccountText,
 } from './styles';
-import { StackParamList } from '../../routes/public.routes';
+import { StackParamList } from '../../../routes/public.routes';
 
 interface SignInFormData {
   email?: string;
@@ -42,14 +44,14 @@ const schema = Yup.object().shape({
   password: Yup.string().required('Senha obrigatória'),
 });
 
-const SignIn: React.FC = () => {
+export const SignIn: React.FC = () => {
   const { navigate } = useNavigation<NavigateProps>();
   const passwordInputRef = useRef<TextInput>(null);
   const [errors, setErrors] = useState<ErrorBag | null>({});
   const [data, setData] = useState<SignInFormData>({});
   const { signIn } = useAuth();
 
-  const handleSubmit = useCallback(async () => {
+  const handleSubmit = async () => {
     try {
       setErrors(null);
 
@@ -70,7 +72,7 @@ const SignIn: React.FC = () => {
         );
       }
     }
-  }, [signIn, data]);
+  };
 
   return (
     <>
@@ -147,5 +149,3 @@ const SignIn: React.FC = () => {
     </>
   );
 };
-
-export default SignIn;
