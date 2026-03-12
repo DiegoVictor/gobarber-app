@@ -2,10 +2,9 @@ import React from 'react';
 import { fireEvent, render, act } from '@testing-library/react-native';
 import { Alert } from 'react-native';
 import MockAdapter from 'axios-mock-adapter';
-
-import SignUp from '../../src/pages/SignUp';
+import { SignUp } from '../../src/pages/public/SignUp';
 import factory from '../utils/factory';
-import api from '../../src/services/api';
+import { api } from '../../src/services/api';
 
 interface User {
   name: string;
