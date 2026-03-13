@@ -1,8 +1,7 @@
 import React from 'react';
 import { fireEvent, render, act } from '@testing-library/react-native';
 import { Alert, Platform } from 'react-native';
-
-import SignIn from '../../src/pages/SignIn';
+import { SignIn } from '../../src/pages/public/SignIn';
 import factory from '../utils/factory';
 
 interface User {
