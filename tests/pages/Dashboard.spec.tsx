@@ -2,9 +2,8 @@ import React from 'react';
 import { fireEvent, render, act, waitFor } from '@testing-library/react-native';
 import { faker } from '@faker-js/faker';
 import MockAdapter from 'axios-mock-adapter';
-
-import api from '../../src/services/api';
-import Dashboard from '../../src/pages/Dashboard';
+import { api } from '../../src/services/api';
+import { Dashboard } from '../../src/pages/private/Dashboard';
 import factory from '../utils/factory';
 
 interface Provider {
