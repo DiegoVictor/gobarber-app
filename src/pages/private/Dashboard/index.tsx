@@ -1,10 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Feather } from '@react-native-vector-icons/feather';
 import { useNavigation } from '@react-navigation/native';
 import { StackScreenProps } from '@react-navigation/stack';
-
-import api from '../../services/api';
-import { useAuth } from '../../hooks/auth';
+import { api } from '../../../services/api';
+import { useAuth } from '../../../hooks/auth';
 import {
   Container,
   Header,
@@ -21,7 +20,7 @@ import {
   ProviderMeta,
   ProviderMetaText,
 } from './styles';
-import { StackParamList } from '../../routes/app.routes';
+import { StackParamList } from '../../../routes/private.routes';
 
 export interface Provider {
   id: string;
@@ -31,21 +30,18 @@ export interface Provider {
 
 type NavigateProps = StackScreenProps<StackParamList>['navigation'];
 
-const Dashboard: React.FC = () => {
+export const Dashboard: React.FC = () => {
   const { user } = useAuth();
   const { navigate } = useNavigation<NavigateProps>();
   const [providers, setProviders] = useState<Provider[]>([]);
 
-  const navigateToProfile = useCallback(() => {
+  const navigateToProfile = () => {
     navigate('Profile');
-  }, [navigate]);
+  };
 
-  const navigateToCreateAppointment = useCallback(
-    (providerId: string) => {
-      navigate('CreateAppointment', { providerId });
-    },
-    [navigate],
-  );
+  const navigateToCreateAppointment = (providerId: string) => {
+    navigate('CreateAppointment', { providerId });
+  };
 
   useEffect(() => {
     (async () => {
@@ -101,5 +97,3 @@ const Dashboard: React.FC = () => {
     </Container>
   );
 };
-
-export default Dashboard;
