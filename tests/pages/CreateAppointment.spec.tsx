@@ -3,9 +3,8 @@ import { act, render, fireEvent, waitFor } from '@testing-library/react-native';
 import { faker } from '@faker-js/faker';
 import MockAdapter from 'axios-mock-adapter';
 import { Alert, Platform } from 'react-native';
-
-import CreatedAppointment from '../../src/pages/CreateAppointment';
-import api from '../../src/services/api';
+import { CreatedAppointment } from '../../src/pages/private/CreateAppointment';
+import { api } from '../../src/services/api';
 import factory from '../utils/factory';
 
 interface User {
