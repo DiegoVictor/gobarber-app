@@ -5,9 +5,8 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { Platform, Alert, ListRenderItemInfo } from 'react-native';
 import { format } from 'date-fns';
 import { StackScreenProps } from '@react-navigation/stack';
-
-import api from '../../services/api';
-import { useAuth } from '../../hooks/auth';
+import { api } from '../../../services/api';
+import { useAuth } from '../../../hooks/auth';
 import {
   Container,
   Header,
@@ -33,7 +32,7 @@ import {
   CreateAppointmentButton,
   CreateAppointmentButtonText,
 } from './styles';
-import { StackParamList } from '../../routes/app.routes';
+import { StackParamList } from '../../../routes/private.routes';
 
 interface RouteParams {
   providerId: string;
@@ -52,7 +51,7 @@ interface AvailabilityItem {
 
 type NavigateProps = StackScreenProps<StackParamList>['navigation'];
 
-const CreatedAppointment: React.FC = () => {
+export const CreatedAppointment: React.FC = () => {
   const [selectedHour, setSelectedHour] = useState(0);
   const [availability, setAvailability] = useState<AvailabilityItem[]>([]);
   const [selectedDate, setSelectedDate] = useState(new Date(Date.now()));
@@ -66,15 +65,15 @@ const CreatedAppointment: React.FC = () => {
   const { user } = useAuth();
   const { goBack, navigate } = useNavigation<NavigateProps>();
 
-  const handleSelectProvider = useCallback((providerId: string) => {
+  const handleSelectProvider = (providerId: string) => {
     setSelectedProvider(providerId);
-  }, []);
+  };
 
-  const handleToggleDatePicker = useCallback(() => {
+  const handleToggleDatePicker = () => {
     setShowDatePicker(state => !state);
-  }, []);
+  };
 
-  const handleDateChanged = useCallback((_: any, date: Date | undefined) => {
+  const handleDateChanged = (_: any, date: Date | undefined) => {
     if (Platform.OS === 'android') {
       setShowDatePicker(false);
     }
@@ -82,11 +81,11 @@ const CreatedAppointment: React.FC = () => {
     if (date) {
       setSelectedDate(date);
     }
-  }, []);
+  };
 
-  const handleSelectHour = useCallback((hour: number) => {
+  const handleSelectHour = (hour: number) => {
     setSelectedHour(hour);
-  }, []);
+  };
 
   const handleCreateAppointment = useCallback(async () => {
     try {
@@ -278,5 +277,3 @@ const CreatedAppointment: React.FC = () => {
     </Container>
   );
 };
-
-export default CreatedAppointment;
