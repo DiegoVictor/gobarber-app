@@ -2,10 +2,9 @@ import React from 'react';
 import { fireEvent, render, act } from '@testing-library/react-native';
 import { Alert, Platform } from 'react-native';
 import MockAdapter from 'axios-mock-adapter';
-
 import factory from '../utils/factory';
-import api from '../../src/services/api';
-import ForgotPassword from '../../src/pages/ForgotPassword';
+import { api } from '../../src/services/api';
+import { ForgotPassword } from '../../src/pages/public/ForgotPassword';
 
 interface User {
   name: string;
