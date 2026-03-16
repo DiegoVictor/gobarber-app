@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Image,
   View,
@@ -10,12 +10,11 @@ import {
 import { Feather } from '@react-native-vector-icons/feather';
 import { useNavigation } from '@react-navigation/native';
 import * as Yup from 'yup';
-
-import api from '../../services/api';
-import getValidationErrors from '../../utils/getValidationErrors';
-import Input from '../../components/Input';
-import Button from '../../components/Button';
-import Logo from '../../assets/logo.png';
+import { api } from '../../../services/api';
+import { getValidationErrors } from '../../../utils/getValidationErrors';
+import { Input } from '../../../components/Input';
+import { Button } from '../../../components/Button';
+import Logo from '../../../assets/logo.png';
 import { Container, Title, BackToSignIn, BackToSignInText } from './styles';
 
 const schema = Yup.object().shape({
@@ -24,12 +23,12 @@ const schema = Yup.object().shape({
     .required('Email obrigatório'),
 });
 
-const ForgotPassword: React.FC = () => {
+export const ForgotPassword: React.FC = () => {
   const { goBack } = useNavigation();
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = useCallback(async () => {
+  const handleSubmit = async () => {
     try {
       setError('');
 
@@ -53,7 +52,7 @@ const ForgotPassword: React.FC = () => {
         );
       }
     }
-  }, [email, goBack]);
+  };
 
   return (
     <>
@@ -97,5 +96,3 @@ const ForgotPassword: React.FC = () => {
     </>
   );
 };
-
-export default ForgotPassword;
