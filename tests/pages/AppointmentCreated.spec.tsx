@@ -2,9 +2,8 @@ import React from 'react';
 import { fireEvent, render } from '@testing-library/react-native';
 import { faker } from '@faker-js/faker';
 import { format } from 'date-fns';
-import {ptBR} from 'date-fns/locale';
-
-import AppointmentCreated from '../../src/pages/AppointmentCreated';
+import { ptBR } from 'date-fns/locale';
+import { AppointmentCreated } from '../../src/pages/private/AppointmentCreated';
 
 const mockedParams = {
   date: faker.date.future(),
