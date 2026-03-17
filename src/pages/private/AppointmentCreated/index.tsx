@@ -1,10 +1,9 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { Feather } from '@react-native-vector-icons/feather';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { StackScreenProps } from '@react-navigation/stack';
-
 import {
   Container,
   Title,
@@ -12,7 +11,7 @@ import {
   OkButton,
   OkButtonText,
 } from './styles';
-import { StackParamList } from '../../routes/app.routes';
+import { StackParamList } from '../../../routes/private.routes';
 
 interface RouteParams {
   date: number;
@@ -20,14 +19,14 @@ interface RouteParams {
 
 type NavigateProps = StackScreenProps<StackParamList>['navigation'];
 
-const AppointmentCreated: React.FC = () => {
+export const AppointmentCreated: React.FC = () => {
   const { reset } = useNavigation<NavigateProps>();
   const { params } = useRoute();
   const routeParams = params as RouteParams;
 
-  const handleOkPressed = useCallback(() => {
+  const handleOkPressed = () => {
     reset({ routes: [{ name: 'Dashboard' }], index: 0 });
-  }, [reset]);
+  };
 
   const formattedDate = useMemo(
     () =>
@@ -52,5 +51,3 @@ const AppointmentCreated: React.FC = () => {
     </Container>
   );
 };
-
-export default AppointmentCreated;
